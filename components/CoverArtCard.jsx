@@ -8,32 +8,50 @@ export default function CoverArtCard({ item }) {
   // Determine the link path based on type
   const linkPath = type === 'album' ? `/album/${slug.current}` : `/book/${slug.current}`
   
+  // Different aspect ratios: albums are square, books are portrait
+  const isBook = type === 'book'
+  const aspectClass = isBook ? 'aspect-[2/3]' : 'aspect-square'
+  
   return (
-    <Link href={linkPath} className="group">
-      <div className="relative aspect-square overflow-hidden bg-gray-100">
-        {coverArt && (
-          <Image
-            src={urlFor(coverArt).width(600).height(600).url()}
-            alt={`${title} cover`}
-            fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          />
-        )}
-      </div>
-      
-      <div className="mt-3">
-        <h3 className="font-medium text-gray-900 group-hover:text-gray-600 transition-colors">
-          {title}
-        </h3>
-        {artist && (
-          <p className="text-sm text-gray-600 mt-1">
-            {artist.name}
-          </p>
-        )}
-        <p className="text-xs text-gray-400 mt-1 uppercase tracking-wide">
-          {type}
-        </p>
+    <Link href={linkPath} className="group block">
+      {/* The artwork container with frame effect on hover */}
+      <div className="relative">
+        {/* The frame border - appears on hover */}
+        <div className="absolute -inset-4 bg-white border-2 border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg" />
+        
+        {/* The artwork */}
+        <div className={`relative ${aspectClass} overflow-hidden bg-gray-100`}>
+          {coverArt && (
+            <Image
+              src={urlFor(coverArt).width(800).height(isBook ? 1200 : 800).url()}
+              alt={`${title} by ${artist?.name}`}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          )}
+          
+          {/* Subtle overlay on hover */}
+          <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
+        </div>
+        
+        {/* Gallery label - appears on hover in the frame */}
+        <div className="absolute -bottom-3 left-0 right-0 px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          <div className="bg-white px-3 py-2 border-t border-gray-200">
+            <h3 className="text-sm font-medium text-gray-900 leading-tight">
+              {title}
+            </h3>
+            {artist && (
+              <p className="text-xs text-gray-600 mt-0.5">
+                {artist.name}
+              </p>
+            )}
+            <p className="text-[10px] text-gray-400 mt-1 uppercase tracking-wider flex items-center justify-between">
+              <span>{type}</span>
+              <span className="text-gray-500">View Details →</span>
+            </p>
+          </div>
+        </div>
       </div>
     </Link>
   )
