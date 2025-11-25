@@ -1,5 +1,5 @@
-import { getAllCoverArt } from '@/lib/sanity.queries'
-import CoverArtCard from '@/components/CoverArtCard'
+import { getAllCoverArt } from '../lib/sanity.queries'
+import CoverArtCard from '../components/CoverArtCard'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
@@ -48,7 +48,7 @@ export default async function Home() {
             Giving credit to the artists who create the art we love
           </p>
         </div>
-      </footer> 
+      </footer>
     </main>
   )
 }

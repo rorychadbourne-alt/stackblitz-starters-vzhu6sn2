@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { urlFor } from '@/lib/sanity.client'
+import { urlFor } from '../lib/sanity.client'
 
 export default function CoverArtCard({ item }) {
   const { title, slug, coverArt, artist, type } = item
