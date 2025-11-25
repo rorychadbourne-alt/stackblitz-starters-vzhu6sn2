@@ -1,5 +1,5 @@
 import { getAllCoverArt } from '../lib/sanity.queries'
-import CoverArtCard from '../Components/CoverArtCard.jsx'
+import CoverArtCard from '../components/CoverArtCard.jsx'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
