@@ -1,5 +1,5 @@
 import { getAllCoverArt } from '../lib/sanity.queries'
-import CoverArtCard from '../components/CoverArtCard.jsx'
+import GalleryGrid from '../components/GalleryGrid.jsx'
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
@@ -20,7 +20,7 @@ export default async function Home() {
         </div>
       </header>
 
-      {/* Gallery Grid */}
+      {/* Gallery */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
         {coverArt.length === 0 ? (
           <div className="text-center py-32">
@@ -33,11 +33,7 @@ export default async function Home() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 md:gap-16">
-            {coverArt.map((item) => (
-              <CoverArtCard key={item._id} item={item} />
-            ))}
-          </div>
+          <GalleryGrid coverArt={coverArt} />
         )}
       </div>
 

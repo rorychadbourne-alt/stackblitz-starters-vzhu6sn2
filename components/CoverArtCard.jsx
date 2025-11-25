@@ -38,17 +38,34 @@ export default function CoverArtCard({ item }) {
         {/* Gallery label - appears on hover in the frame */}
         <div className="absolute -bottom-3 left-0 right-0 px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
           <div className="bg-white px-3 py-2 border-t border-gray-200">
-            <h3 className="text-sm font-medium text-gray-900 leading-tight">
-              {title}
-            </h3>
+            {/* Title with inline label */}
+            <div className="flex items-baseline gap-2">
+              <span className="text-[9px] text-gray-400 uppercase tracking-widest font-medium">
+                {type}
+              </span>
+              <h3 className="text-sm font-medium text-gray-900 leading-tight">
+                {title}
+              </h3>
+            </div>
+            
+            {/* Artist with inline label and medium */}
             {artist && (
-              <p className="text-xs text-gray-600 mt-0.5">
-                {artist.name}
-              </p>
+              <div className="flex items-baseline gap-2 mt-1">
+                <span className="text-[9px] text-gray-400 uppercase tracking-widest font-medium">
+                  Artist
+                </span>
+                <p className="text-xs text-gray-600">
+                  {artist.name}
+                  {artist.medium && (
+                    <span className="text-gray-500">, {artist.medium}</span>
+                  )}
+                </p>
+              </div>
             )}
-            <p className="text-[10px] text-gray-400 mt-1 uppercase tracking-wider flex items-center justify-between">
-              <span>{type}</span>
-              <span className="text-gray-500">View Details →</span>
+            
+            {/* View details indicator */}
+            <p className="text-[10px] text-gray-500 mt-2 text-right">
+              View Details →
             </p>
           </div>
         </div>
